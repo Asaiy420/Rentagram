@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
-export default async function syncUser() {
+export async function syncUser() {
   try {
     const { userId } = await auth();
     const user = await currentUser(); //* Call the function and await its result
@@ -34,4 +34,22 @@ export default async function syncUser() {
   } catch (error) {
     console.error("Error syncing user:", error);
   }
+}
+
+export async function getUserByClerkId(clerkId: string){
+  return prisma.user.findUnique({
+    where: {
+      clerkId
+    },
+    include: {
+      _count:{
+        select: {
+          follower: true,
+          following: true,
+          posts: true,
+
+        }
+      }
+    }
+  })
 }
