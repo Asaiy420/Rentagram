@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.25.6",
     "@clerk/nextjs": "^6.13.0",
     "@prisma/client": "^6.5.0",
     "@radix-ui/react-avatar": "^1.1.3",
